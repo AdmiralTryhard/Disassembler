@@ -7,7 +7,7 @@
 
 std::ifstream generate_stream();
 std::bitset<36> read_instruction(std::ifstream& input);
-
+void interpret_instruction(std::bitset<36> instruction);
 int main(){
     //check length and magic bytes
     std::ifstream input = generate_stream();
@@ -26,9 +26,11 @@ int main(){
         throw std::runtime_error("Bad magic bytes");
     }
 
-    //read one instruction
-    Interpreter interpretty();
+    //read instructions
+   // while(!input.eof()){ // save this loop for the end. It is tested already
     std::bitset<36> current_instruction = read_instruction(input);
+    interpret_instruction(current_instruction);
+ //   }
     return 0;
 }
 
@@ -57,4 +59,10 @@ std::bitset<36>  read_instruction(std::ifstream& input){
     bits |= (bytes[4] & 0xFF) >> 4;
     std::cout << bits << '\n';
     return bits;
+}
+
+void interpret_instruction(std::bitset<36> instruction){
+    Interpreter interpretty{};
+    std::string readable_instruction = interpretty.interpret_instruction(instruction);
+    std::cout << readable_instruction << std::endl;
 }
