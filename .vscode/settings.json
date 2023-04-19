@@ -57,6 +57,7 @@
         "iostream": "cpp",
         "istream": "cpp",
         "numbers": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "xstring": "cpp"
     }
 }

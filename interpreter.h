@@ -15,6 +15,13 @@ std::bitset<9> C_bus;
 std::bitset<3> memory;
 std::bitset<4> B_bus;
 void set_sub_instructions();
+std::string ALU_operation();
+std::string b_bus_selection();
+std::string c_bus_selection();
+std::string chain_for_c_bus(std::string to_check);
+
+
+//here is all the hex turned into ints to use with bitset.to_ulong();
 const int bipush = 16;
 const int dup = 89;
 const int GOTO = 167;
@@ -35,4 +42,18 @@ const int nop = 0;
 const int pop = 87;
 const int swap = 95;
 const int wide = 196;
+
+
+//more consts for b bus
+const int MDR = 0;
+const int PC = 1;
+const int MBR = 2;
+const int MBRU = 3;
+const int SP = 4;
+const int LV = 5;
+const int CPP = 6;
+const int TOS = 7;
+const int OPC = 8;
+
+
 };
