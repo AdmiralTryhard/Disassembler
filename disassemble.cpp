@@ -1,24 +1,23 @@
 #include <fstream>
 #include <bitset>
 #include <iostream>
+#include "interpreter.h"
+
+
+
+std::ifstream generate_stream();
+std::bitset<36> read_instruction(std::ifstream& input);
+
 
 int main(){
-    std::string filename{"mic1ijvm.mic1"};
-    std::ifstream input{filename, std::ios::binary};
-
-    if(!input){
-        throw std::runtime_error("Cannot open file in binary mode: " + filename);
-    }
-
+    //check length and magic bytes
+    std::ifstream input = generate_stream();
     input.seekg(0, input.end);
     int length = input.tellg();
     input.seekg(0, input.beg);
-    std::cout << length << '\n';
     if (length != 2564) {
         throw std::runtime_error("File size should be 2564 bytes, but is " + std::to_string(length));
-
     }
-
     char bytes[5];
     input.read(bytes, 4);
     if(bytes[0] != 0x12 || 
@@ -29,6 +28,25 @@ int main(){
     }
 
     //read one instruction
+    std::bitset<36> current_instruction = read_instruction(input);
+    return 0;
+}
+
+
+std::ifstream generate_stream() {
+    std::string filename{"mic1ijvm.mic1"};
+    std::ifstream input{filename, std::ios::binary};
+
+    if(!input){
+        throw std::runtime_error("Cannot open file in binary mode: " + filename);
+    }
+
+    return input;
+}
+
+std::bitset<36>  read_instruction(std::ifstream& input){
+        //read one instruction
+    char bytes[5];
     input.read(bytes, 5);
     std::bitset<36> bits;
     bits |= (bytes[0] & 0xFF);
@@ -37,9 +55,7 @@ int main(){
     bits |= (bytes[2] & 0xFF) << 12;
     bits |= (bytes[3] & 0xFF) << 4;
     bits |= (bytes[4] & 0xFF) >> 4;
-
-
     std::cout << bits << '\n';
 
-    return 0;
+    return bits;
 }
