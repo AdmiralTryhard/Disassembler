@@ -8,6 +8,7 @@ std::string interpret_instruction(std::bitset<36> instruction);
 
 
 private:
+std::bitset<36> full_instruction;
 std::bitset<9> next_address;
 std::bitset<3> JAM;
 std::bitset<8> ALU;

@@ -45,7 +45,7 @@ std::ifstream generate_stream() {
 }
 
 std::bitset<36>  read_instruction(std::ifstream& input){
-        //read one instruction
+    //read one instruction
     char bytes[5];
     input.read(bytes, 5);
     std::bitset<36> bits;
@@ -56,6 +56,5 @@ std::bitset<36>  read_instruction(std::ifstream& input){
     bits |= (bytes[3] & 0xFF) << 4;
     bits |= (bytes[4] & 0xFF) >> 4;
     std::cout << bits << '\n';
-
     return bits;
 }
