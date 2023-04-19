@@ -3,12 +3,12 @@
 
 
 
-std::string interpreter::interpret_instruction(std::bitset<36> instruction){
+std::string Interpreter::interpret_instruction(std::bitset<36> instruction){
     
     return "I haven't finished this.";
 }
 
-void interpreter::set_sub_instructions(){
+void Interpreter::set_sub_instructions(){
 
 }
 

@@ -8,7 +8,6 @@
 std::ifstream generate_stream();
 std::bitset<36> read_instruction(std::ifstream& input);
 
-
 int main(){
     //check length and magic bytes
     std::ifstream input = generate_stream();
@@ -28,6 +27,7 @@ int main(){
     }
 
     //read one instruction
+    Interpreter interpretty();
     std::bitset<36> current_instruction = read_instruction(input);
     return 0;
 }

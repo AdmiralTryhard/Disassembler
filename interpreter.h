@@ -1,11 +1,10 @@
 #include <string.h>
 #include <bitset>
 
-class interpreter{
+class Interpreter{
 
 public:
 std::string interpret_instruction(std::bitset<36> instruction);
-
 
 private:
 std::bitset<36> full_instruction;
