@@ -7,7 +7,8 @@
 
 std::ifstream generate_stream();
 std::bitset<36> read_instruction(std::ifstream& input);
-void interpret_instruction(std::bitset<36> instruction);
+void interpret_instruction(std::bitset<36> instruction, int address);
+void print_bit_map();
 int main(){
     //check length and magic bytes
     std::ifstream input = generate_stream();
@@ -26,11 +27,14 @@ int main(){
         throw std::runtime_error("Bad magic bytes");
     }
 
+    int i = 1;
     //read instructions
-   // while(!input.eof()){ // save this loop for the end. It is tested already
+    print_bit_map();
+    while(!input.eof() && i < 200){
     std::bitset<36> current_instruction = read_instruction(input);
-    interpret_instruction(current_instruction);
- //   }
+    interpret_instruction(current_instruction, i);
+    ++i;
+    }
     return 0;
 }
 
@@ -57,12 +61,19 @@ std::bitset<36>  read_instruction(std::ifstream& input){
     bits |= (bytes[2] & 0xFF) << 12;
     bits |= (bytes[3] & 0xFF) << 4;
     bits |= (bytes[4] & 0xFF) >> 4;
-    std::cout << bits << '\n';
     return bits;
 }
 
-void interpret_instruction(std::bitset<36> instruction){
+void interpret_instruction(std::bitset<36> instruction, int address){
     Interpreter interpretty{};
-    std::string readable_instruction = interpretty.interpret_instruction(instruction);
+    std::string readable_instruction = interpretty.interpret_instruction(instruction, address);
     std::cout << readable_instruction << std::endl;
+}
+
+void print_bit_map(){
+    std::cout << "ADR  NXT J J J  S S F F E E I I  H O T C L S P M M  W R F  B \n"
+    << "         M A A  L R 0 1 N N N N    P O P V P C D A  R E E  - \n"
+    << "         P M M  L A     A B V C    C S P       R R  I A T  B \n"
+    << "         C N Z  8 1         A                       T D C  U \n"
+    << "                                                    E   H  S \n";
 }

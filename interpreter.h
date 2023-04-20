@@ -4,9 +4,10 @@
 class Interpreter{
 
 public:
-std::string interpret_instruction(std::bitset<36> instruction);
+std::string interpret_instruction(std::bitset<36> instruction, int address);
 
 private:
+int address;
 std::bitset<36> full_instruction;
 std::bitset<9> next_address;
 std::bitset<3> JAM;
@@ -15,11 +16,13 @@ std::bitset<9> C_bus;
 std::bitset<3> memory;
 std::bitset<4> B_bus;
 void set_sub_instructions();
+std::string ALU_decode();
 std::string ALU_operation();
 std::string b_bus_selection();
 std::string c_bus_selection();
 std::string chain_for_c_bus(std::string to_check);
-
+std::string memory_check();
+std::string special_location();
 
 //here is all the hex turned into ints to use with bitset.to_ulong();
 const int bipush = 16;
